@@ -10,7 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// routing default
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/mahasiswa', function (){
+    echo 'Mahasiswa';
 });
