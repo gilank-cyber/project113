@@ -16,6 +16,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/mahasiswa', function (){
-    echo 'Mahasiswa';
+Route::get('/tentang', function (){
+    return view('tentang');
 });
+
+Route::resource('ujian', 'UjianController');
