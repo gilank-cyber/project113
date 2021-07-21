@@ -4,7 +4,7 @@
 @section('content')
 <section class="py-5">
     <div class="col-6 card-body shadow">
-        <h3 class="title">Tambah Data <span class="cl-theme">Ujian</span></h3>
+        <h2 class="title">Tambah Data <span class="cl-theme">Ujian</span></h2>
         <div class="section-body">
             <form action="/ujian" method="post">
                 @csrf

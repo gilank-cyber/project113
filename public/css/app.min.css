@@ -259,12 +259,12 @@ body .navbar .nav-item .nav-link .link-text {
 }
 
 body .navbar .nav-item .nav-link .link-icon {
-    color: tomato
+    color: #fa8072
 }
 
 body .navbar .nav-item .nav-link .link-badge {
     color: white;
-    background-color: tomato
+    background-color: #fa8072
 }
 
 body .navbar .nav-logo {
@@ -280,11 +280,11 @@ body .bg-secondary {
 }
 
 body .bg-theme {
-    background-color: tomato
+    background-color: #fa8072
 }
 
 body .cl-theme {
-    color: tomato
+    color: #fa8072
 }
 
 body.quickly-light .navbar {
@@ -341,7 +341,7 @@ body.quickly-dark .navbar .nav-item .nav-link .link-text {
 }
 
 body.quickly-dark .navbar .nav-item .nav-link .link-icon {
-    color: tomato
+    color: #fa8072
 }
 
 body.quickly-dark .navbar .nav-logo {
@@ -357,11 +357,11 @@ body.quickly-dark .bg-secondary {
 }
 
 body.quickly-dark .bg-theme {
-    background-color: tomato
+    background-color: #fa8072
 }
 
 body.quickly-dark .cl-theme {
-    color: tomato
+    color: #fa8072
 }
 
 .title {

@@ -2,7 +2,7 @@
 
 @section('title', 'Ujian')
 @section('content')
-<h3 class="title">Data <span class="cl-theme">Ujian</span></h3>
+<h2 class="title">Data <span class="cl-theme">Ujian</span></h2>
 @if (session('status'))
 <div class="alert alert-success">
     {{ session('status') }}

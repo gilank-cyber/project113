@@ -21,3 +21,5 @@ Route::get('/tentang', function (){
 });
 
 Route::resource('ujian', 'UjianController');
+
+Route::resource('exam', 'AController');
