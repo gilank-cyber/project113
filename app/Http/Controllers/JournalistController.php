@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Journalist;
 use Illuminate\Http\Request;
 
-use App\Ujian;
-
-
-class UjianController extends Controller
+class JournalistController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,8 @@ class UjianController extends Controller
      */
     public function index()
     {
-        $ujian = Ujian::paginate(9);
-        return view('ujian.index', ['ujian' => $ujian]);
+        $journalists = Journalist::paginate(9);
+        return view('jurnalis.index', ['journalists' => $journalists]);
     }
 
     /**
@@ -27,7 +25,7 @@ class UjianController extends Controller
      */
     public function create()
     {
-        return view('ujian.create');
+        return view('jurnalis.create');
     }
 
     /**
@@ -39,19 +37,19 @@ class UjianController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_mk' => 'required',
-            'dosen' => 'required',
-            'jumlah_soal' => 'required',
-            'keterangan' => 'required'
+            'nama' => 'required',
+            'jk' => 'required',
+            'no_hp' => 'required',
+            'alamat' => 'required'
         ]);
-        Ujian::create($request->all());
-        return redirect('/ujian')->with('status', 'Ujian ' . $request->nama_mk . ' berhasil ditambahkan!');
+        Journalist::create($request->all());
+        return redirect('/journalist')->with('status', 'Journalist ' . $request->nama . ' berhasil ditambahkan!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -67,8 +65,8 @@ class UjianController extends Controller
      */
     public function edit($id)
     {
-        $ujian = Ujian::find($id);
-        return view('ujian.edit', compact('ujian'));
+        $journalists = Journalist::find($id);
+        return view('jurnalis.edit', compact('journalists'));
     }
 
     /**
@@ -81,32 +79,32 @@ class UjianController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_mk' => 'required',
-            'dosen' => 'required',
-            'jumlah_soal' => 'required',
-            'keterangan' => 'required'
+            'nama' => 'required',
+            'jk' => 'required',
+            'no_hp' => 'required',
+            'alamat' => 'required'
         ]);
-        Ujian::where('id', $id)
+        Journalist::where('id', $id)
             ->update([
-                'nama_mk' => $request->nama_mk,
-                'dosen' => $request->dosen,
-                'jumlah_soal' => $request->jumlah_soal,
-                'keterangan' => $request->keterangan
+                'nama' => $request->nama,
+                'jk' => $request->jk,
+                'no_hp' => $request->no_hp,
+                'alamat' => $request->alamat
             ]);
 
-        return redirect('/ujian')->with('status', 'Ujian ' . $request->nama_mk . ' berhasil diubah!');
+            return redirect('/journalist')->with('status', 'Journalist ' . $request->nama . ' berhasil diubah!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Journalist  $journalist
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $ujian = Ujian::find($id);
-        Ujian::destroy($id);
-        return redirect('/ujian')->with('status', 'Ujian ' . $ujian->nama_mk . ' berhasil dihapus!');
+        $journalists = Journalist::find($id);
+        Journalist::destroy($id);
+        return redirect('/journalist')->with('status', 'Journalist ' . $journalists->nama . ' berhasil dihapus!');
     }
 }

@@ -13,13 +13,15 @@ use Illuminate\Support\Facades\Route;
 */
 // routing default
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
 Route::get('/tentang', function (){
     return view('tentang');
 });
 
-Route::resource('ujian', 'UjianController');
+Route::resource('journalist', 'JournalistController');
+
+Route::resource('berita', 'BeritaController');
 
 Route::resource('exam', 'AController');

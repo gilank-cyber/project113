@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSoftDeleteToExam extends Migration
+class CreateBeritasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddSoftDeleteToExam extends Migration
      */
     public function up()
     {
-        Schema::table('exam', function (Blueprint $table) {
-            $table->softDeletes();
+        Schema::create('beritas', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('berita', 50);
+            $table->string('kategori', 50);
+            $table->bigInteger('jurnalis_id', 20);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddSoftDeleteToExam extends Migration
      */
     public function down()
     {
-        Schema::table('exam', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('beritas');
     }
 }
