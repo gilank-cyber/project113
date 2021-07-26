@@ -23,5 +23,3 @@ Route::get('/tentang', function (){
 Route::resource('journalist', 'JournalistController');
 
 Route::resource('berita', 'BeritaController');
-
-Route::resource('exam', 'AController');

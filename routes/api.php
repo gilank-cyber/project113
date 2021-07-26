@@ -16,12 +16,14 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/berita', 'BeritaController@index');
-Route::post('/berita', 'BeritaController@create');
-Route::patch('/berita/{berita}', 'BeritaController@edit');
-Route::delete('/berita/{berita}', 'BeritaController@destroy');
+Route::get('/berita', 'BeritaController@tampil');
+Route::get('/berita/{berita}', 'BeritaController@shows');
+Route::post('/berita', 'BeritaController@tambah');
+Route::patch('/berita/{berita}', 'BeritaController@ubah');
+Route::delete('/berita/{berita}', 'BeritaController@hapus');
 
-Route::get('/jurnalis', 'JournalistController@index');
-Route::post('/jurnalis', 'JournalistController@create');
-Route::patch('/jurnalis/{jurnalis}', 'JournalistController@edit');
-Route::delete('/jurnalis/{jurnalis}', 'JournalistController@destroy');
+Route::get('/jurnalis', 'JournalistController@tampil');
+Route::get('/jurnalis/{jurnalis}', 'JournalistController@shows');
+Route::post('/jurnalis', 'JournalistController@tambah');
+Route::patch('/jurnalis/{jurnalis}', 'JournalistController@ubah');
+Route::delete('/jurnalis/{jurnalis}', 'JournalistController@hapus');

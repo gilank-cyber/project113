@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Journalist;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class JournalistController extends Controller
@@ -16,6 +17,20 @@ class JournalistController extends Controller
     {
         $journalists = Journalist::paginate(9);
         return view('jurnalis.index', ['journalists' => $journalists]);
+    }
+
+    public function tampil()
+    {
+        //Menampilkan Data berbentuk Json
+
+        $journalists= Journalist::all();
+        return response()->json($journalists);
+    }
+    //Menampilkan Data Berdasarkan Id
+    public function shows($journalists)
+    {
+        $journalists = Journalist::where('id', $journalists)->get();
+        return response()->json($journalists);
     }
 
     /**
@@ -44,6 +59,36 @@ class JournalistController extends Controller
         ]);
         Journalist::create($request->all());
         return redirect('/journalist')->with('status', 'Journalist ' . $request->nama . ' berhasil ditambahkan!');
+    }
+    public function tambah(Request $request)
+    {
+        //Mengecek kondisi jika ada form yang tidak diisi maka tidak adan tersimpan datanya dan sebaliknya
+        $validate = Validator::make($request->all(), [
+            'nama' => 'required',
+            'jk' => 'required',
+            'no_hp' => 'required',
+            'alamat' => 'required'
+            
+        ]);
+        if($validate->passes()) {
+            $journalists = Journalist::create($request->all());
+            return response()->json([
+                'pesan' => 'Data Berhasil Disimpan',
+                'data' => $journalists
+
+            ]); 
+            return Journalist::create($request->all());
+        }
+        return response()->json([
+            'pesan' => 'Data Gagal Disimpan']);
+    }
+
+    public function ubah(Request $request, Journalist $journalists)
+    {
+        //Fungsi Untuk Mengubah data
+        $journalists->update($request->all());
+        return response()->json(['pesan' => 'Data berhasil diubah', 
+        'data'=> $journalists]);
     }
 
     /**
@@ -106,5 +151,15 @@ class JournalistController extends Controller
         $journalists = Journalist::find($id);
         Journalist::destroy($id);
         return redirect('/journalist')->with('status', 'Journalist ' . $journalists->nama . ' berhasil dihapus!');
+    }
+    public function hapus($journalists)
+    {
+        //Fungsi Menghapus data berdasarkan
+        $data = Journalist::where('id', $journalists)->first();
+        if (empty($data)){
+            return response()->json(['pesan', 'Data tidak ditemukan'], 404);
+        }
+        $data->delete();
+        return response()->json(['pesan'=> 'Data berhasil dihapus'],200);
     }
 }
