@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class BeritaController extends Controller
 {
+
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api', ['exept' => ['tampil','index','shows']]);
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -19,14 +24,14 @@ class BeritaController extends Controller
         $beritas = Berita::with('Journalist')->paginate(9);
         return view('berita.index', ['beritas' => $beritas]);
     }
-    
+
     public function tampil()
     {
         //Menampilkan Data berbentuk Json
         // $beritas= beritas::with('wisata')->get();
         // return response()->json($beritas);
 
-        $beritas= Berita::all();
+        $beritas = Berita::all();
         return response()->json($beritas);
     }
     //Menampilkan Data Berdasarkan Id
@@ -73,27 +78,30 @@ class BeritaController extends Controller
             'lokasi' => 'required',
             'kategori' => 'required',
             'jurnalis_id' => 'required'
-            
+
         ]);
-        if($validate->passes()) {
+        if ($validate->passes()) {
             $beritas = Berita::create($request->all());
             return response()->json([
                 'pesan' => 'Data Berhasil Disimpan',
                 'data' => $beritas
 
-            ]); 
+            ]);
             return Berita::create($request->all());
         }
         return response()->json([
-            'pesan' => 'Data Gagal Disimpan']);
+            'pesan' => 'Data Gagal Disimpan'
+        ]);
     }
 
     public function ubah(Request $request, Berita $beritas)
     {
         //Fungsi Untuk Mengubah data
         $beritas->update($request->all());
-        return response()->json(['pesan' => 'Data berhasil diubah', 
-        'data'=> $beritas]);
+        return response()->json([
+            'pesan' => 'Data berhasil diubah',
+            'data' => $beritas
+        ]);
     }
 
     /**
@@ -163,10 +171,10 @@ class BeritaController extends Controller
     {
         //Fungsi Menghapus data berdasarkan
         $data = Berita::where('id', $beritas)->first();
-        if (empty($data)){
+        if (empty($data)) {
             return response()->json(['pesan', 'Data tidak ditemukan'], 404);
         }
         $data->delete();
-        return response()->json(['pesan'=> 'Data berhasil dihapus'],200);
+        return response()->json(['pesan' => 'Data berhasil dihapus'], 200);
     }
 }
