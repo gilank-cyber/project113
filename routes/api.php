@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
 
-Route::get('/berita', 'BeritaController@tampil')->middleware('auth:api');
+Route::get('/berita', 'BeritaController@tampil');
 Route::get('/berita/{berita}', 'BeritaController@shows')->middleware('auth:api');
 Route::post('/berita', 'BeritaController@tambah')->middleware('auth:api');
 Route::patch('/berita/{berita}', 'BeritaController@ubah');
